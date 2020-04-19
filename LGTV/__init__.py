@@ -93,7 +93,7 @@ def main():
     if len(sys.argv) < 2:
         usage("Too few arguments")
         sys.exit(1)
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
     command = None
     filename = None
