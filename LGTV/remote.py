@@ -160,8 +160,8 @@ class LGTVRemote(WebSocketClient):
     #
     def on(self):
         if not self.__macAddress:
-            print ("Client must have been powered on and paired before power on works")
-        send_magic_packet(self.__macAddress)
+            logging.warning("Client must have been powered on and paired before power on works")
+        send_magic_packet(self.__macAddress, ip_address=self.__ip)
 
     def off(self):
         self.__send_command("request", "ssap://system/turnOff")
