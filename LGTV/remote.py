@@ -81,10 +81,11 @@ class LGTVRemote(WebSocketClient):
         self.send(json.dumps(hello_data))
 
     def closed(self, code, reason=None):
-        print (json.dumps({
+        reason = reason.decode('utf-8') if hasattr(reason, 'decode') else reason
+        logging.debug(json.dumps({
             "closing": {
                 "code": code,
-                "reason": reason.decode('utf-8')
+                "reason": reason,
             }
         }))
 
@@ -115,7 +116,7 @@ class LGTVRemote(WebSocketClient):
         self.__waitClose()
 
     def __waitClose(self):
-        self._th.join(timeout=1)
+        # self._th.join(timeout=1)
         self.close()
 
     def __defaultHandler(self, response):
